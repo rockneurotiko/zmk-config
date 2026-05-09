@@ -3,4 +3,4 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    uses: urob/zmk-actions/.github/workflows/build-user-config.yml@12401d756af5e640fe29af8910d03d292d240cbb # v10.0.0
+    uses: urob/zmk-actions/.github/workflows/build-user-config.yml@799c2e23b5deb24d4d6c930a97602f7361af0f5f # post-v10.0.0, fixes pkg_resources
