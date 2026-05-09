@@ -184,7 +184,6 @@ Local builds use **Docker** - no Zephyr SDK or toolchain installation needed.
 ```bash
 git clone https://github.com/rockneurotiko/zmk-config
 cd zmk-config
-
 just docker-pull   # Pull the ZMK build image (~2 GB, once)
 just init          # Initialize west workspace + fetch ZMK & modules (~5 min)
 ```

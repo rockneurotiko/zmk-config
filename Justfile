@@ -23,6 +23,12 @@ config     := absolute_path("config")
 build_dir  := absolute_path(".build")
 out        := absolute_path("firmware")
 
+# Paths relative to the project root — used inside Docker where the mount
+# point (/workspace) differs from the host absolute path.
+rel_config    := "/workspace/config"
+rel_build_dir := ".build"
+rel_zmk_app   := "zmk/app"
+
 build_matrix := "build.yaml"
 
 # Docker image matching the Zephyr version used by our ZMK revision.
@@ -98,27 +104,40 @@ _build_single board shield snippet artifact cmake_args *west_args:
     artifact="{{ artifact }}"
     cmake_args="{{ cmake_args }}"
     artifact="${artifact:-${shield:+${shield// /+}-}${board//\//_}}"
-    build_path="{{ build_dir }}/$artifact"
 
     echo "━━━ Building $artifact ━━━"
 
-    cmd="west build -s zmk/app -d $build_path -b $board {{ west_args }}"
-    cmd+=" ${snippet:+-S \"$snippet\"}"
-    cmd+=" -- -DZMK_CONFIG={{ config }}"
-    cmd+=" ${shield:+-DSHIELD=\"$shield\"}"
-    cmd+=" $cmake_args"
-
     if [[ "{{ use_docker }}" == "1" ]]; then
+        # Inside Docker the workspace is /workspace, not the host path.
+        build_path="{{ rel_build_dir }}/$artifact"
+        cmd="west zephyr-export >/dev/null 2>&1;"
+        cmd+=" west build -s {{ rel_zmk_app }} -d $build_path -b $board {{ west_args }}"
+        cmd+=" ${snippet:+-S \"$snippet\"}"
+        cmd+=" -- -DZMK_CONFIG={{ rel_config }}"
+        cmd+=" -DBOARD_ROOT=/workspace"
+        cmd+=" ${shield:+-DSHIELD=\"$shield\"}"
+        cmd+=" $cmake_args"
+
         docker run --rm \
             -v "{{ justfile_directory() }}":/workspace \
             -w /workspace \
             -u "$(id -u):$(id -g)" \
+            -e ZEPHYR_BASE=/workspace/zephyr \
             {{ docker_image }} \
             bash -c "$cmd"
     else
+        build_path="{{ build_dir }}/$artifact"
+        cmd="west build -s zmk/app -d $build_path -b $board {{ west_args }}"
+        cmd+=" ${snippet:+-S \"$snippet\"}"
+        cmd+=" -- -DZMK_CONFIG={{ config }}"
+        cmd+=" ${shield:+-DSHIELD=\"$shield\"}"
+        cmd+=" $cmake_args"
+
         eval "$cmd"
     fi
 
+    # Copy artifacts — use host paths (build_path on host is always under build_dir)
+    build_path="{{ build_dir }}/$artifact"
     mkdir -p "{{ out }}"
     if [[ -f "$build_path/zephyr/zmk.uf2" ]]; then
         cp "$build_path/zephyr/zmk.uf2" "{{ out }}/$artifact.uf2"
@@ -177,13 +196,40 @@ flash expr:
     fw="${files[0]}"
     echo "━━━ Flashing $(basename "$fw") ━━━"
 
-    # Helper: find a mounted UF2 bootloader drive.
+    # Helper: find a UF2 bootloader drive (mounted or not).
+    # 1) Check already-mounted drives by name.
+    # 2) If not found, look for unmounted UF2 block devices and auto-mount.
     find_drive() {
-        find /run/media/"$USER" /media /mnt \
+        # Check mounted drives first
+        local d
+        d=$(find /run/media/"$USER" /media /mnt \
             -maxdepth 2 -type d \
             \( -iname "*nicenano*" -o -iname "*nrf*" -o -iname "*uf2*" \
-               -o -iname "*xiao*" -o -iname "*nrf52boot*" \) \
-            2>/dev/null | head -1
+               -o -iname "*xiao*" -o -iname "*nrf52boot*" \
+               -o -iname "*keebart*" \) \
+            2>/dev/null | head -1 || true)
+        if [[ -n "$d" ]]; then
+            echo "$d"
+            return
+        fi
+
+        # Look for unmounted UF2 block devices via lsblk
+        local dev
+        dev=$(lsblk -rno NAME,LABEL,FSTYPE,MOUNTPOINT \
+            | awk '$3 == "vfat" && $4 == "" && tolower($2) ~ /nicenano|nrf|uf2|xiao|nrf52boot|keebart/ {print "/dev/" $1; exit}' \
+            || true)
+        if [[ -n "$dev" ]]; then
+            echo "🔌 Found unmounted device $dev, mounting…" >&2
+            udisksctl mount -b "$dev" --no-user-interaction >&2 2>&1 || true
+            sleep 1
+            # Re-check mounted drives
+            find /run/media/"$USER" /media /mnt \
+                -maxdepth 2 -type d \
+                \( -iname "*nicenano*" -o -iname "*nrf*" -o -iname "*uf2*" \
+                   -o -iname "*xiao*" -o -iname "*nrf52boot*" \
+                   -o -iname "*keebart*" \) \
+                2>/dev/null | head -1 || true
+        fi
     }
 
     drive=$(find_drive)

@@ -4,6 +4,8 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: urob
       url-base: https://github.com/urob
+    - name: mctechnology17
+      url-base: https://github.com/mctechnology17
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -14,6 +16,11 @@ manifest:
     - name: zmk-helpers
       remote: urob
       revision: v0.3 # Should match ZMK release.
+
+    # nice!view custom display (dual battery, WPM, bongo cat, modifiers).
+    - name: zmk-nice-oled
+      remote: mctechnology17
+      revision: 46f824abb2bd41f1287c5c68abd14122af6042a3
 
     # ── Optional modules (uncomment to enable) ──────────────────────────
     # Adaptive key (for magic-shift / repeat key):

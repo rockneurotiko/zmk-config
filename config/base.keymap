@@ -38,6 +38,13 @@
   #define _BT_SEL_KEYS_ &trans &trans &trans &trans &trans
 #endif
 
+#ifdef CONFIG_ZMK_RGB_UNDERGLOW
+  #include <dt-bindings/zmk/rgb.h>
+  #define _RGB_TOG_ &rgb_ug RGB_TOG
+#else
+  #define _RGB_TOG_ &trans
+#endif
+
 /* ── Layer indices ─────────────────────────────────────────────────────────── */
 
 #define DEF     0
@@ -150,11 +157,11 @@ ZMK_TAP_DANCE(td_csrc, bindings = <&kp LC(S)>, <&kp LA(LC(LS(PRCNT)))>;)
  * Ported from Moonlander combo definitions.
  * ──────────────────────────────────────────────────────────────────────────── */
 
-#define COMBO_TERM_FAST 30
+#define COMBO_TERM_FAST 50
 #define COMBO_IDLE_FAST 150
 
-ZMK_COMBO(esc_combo,  &kp ESC,       LT3 LT4, DEF, COMBO_TERM_FAST, COMBO_IDLE_FAST)  // P+Y → Esc
-ZMK_COMBO(cw_combo,   &caps_word,    LT4 RT0, DEF, COMBO_TERM_FAST, COMBO_IDLE_FAST)  // Y+F → Caps Word
+ZMK_COMBO(esc_combo,  &kp ESC,       LT3 LT4, DEF, COMBO_TERM_FAST, COMBO_IDLE_FAST)  // ',  → Esc
+ZMK_COMBO(cw_combo,   &caps_word,    LT0 RT0, DEF, COMBO_TERM_FAST, COMBO_IDLE_FAST)  // Y+F → Caps Word
 
 /* ── Conditional layer: FN + NUM → SYS ─────────────────────────────────────*/
 
@@ -391,7 +398,7 @@ ZMK_BASE_LAYER(EmacsW,
 
 /*  Layer 9 — System (activated by FN + NUM simultaneously)
  *  ╭──────┬──────┬──────┬──────┬──────╮ ╭──────┬──────┬──────┬──────┬──────╮
- *  │ BT 0 │ BT 1 │ BT 2 │ BT 3 │BT CLR│ │      │      │      │      │      │
+ *  │ BT 0 │ BT 1 │ BT 2 │ BT 3 │BT CLR│ │RGB Tg│      │      │      │      │
  *  ├──────┼──────┼──────┼──────┼──────┤ ├──────┼──────┼──────┼──────┼──────┤
  *  │      │      │      │      │ Boot │ │ Boot │      │      │      │      │
  *  ├──────┼──────┼──────┼──────┼──────┤ ├──────┼──────┼──────┼──────┼──────┤
@@ -402,7 +409,7 @@ ZMK_BASE_LAYER(EmacsW,
  */
 ZMK_BASE_LAYER(Sys,
 //╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-                               _BT_SEL_KEYS_                            ,   ___           ___           ___           ___           ___         ,
+                               _BT_SEL_KEYS_                            ,   _RGB_TOG_     ___           ___           ___           ___         ,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     ___           ___           ___           ___           &bootloader ,   &bootloader   ___           ___           ___           ___         ,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
