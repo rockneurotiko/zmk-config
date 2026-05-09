@@ -1,1 +1,17 @@
 .DS_Store
+/.env
+
+# West workspace (fetched by `just init`)
+.west/
+zmk/
+modules/
+zephyr/*
+!zephyr/module.yml
+zmk-helpers/
+
+# Build artifacts
+.build/
+firmware/
+
+# Extracted ZSA layout files
+*.zip

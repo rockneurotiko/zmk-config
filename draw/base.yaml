@@ -1,0 +1,380 @@
+layout: {zmk_keyboard: base}
+layers:
+  Base:
+  - ''''
+  - ','
+  - .
+  - P
+  - Y
+  - F
+  - G
+  - C
+  - R
+  - L
+  - {t: A, h: Shift}
+  - {t: O, h: Alt}
+  - {t: E, h: Gui}
+  - {t: U, h: Ctrl}
+  - {t: I, h: EmacsN}
+  - {t: D, h: EmacsW}
+  - {t: H, h: Ctrl}
+  - {t: T, h: Gui}
+  - {t: N, h: Alt}
+  - {t: S, h: Shift}
+  - ;
+  - Q
+  - J
+  - K
+  - X
+  - B
+  - M
+  - W
+  - V
+  - Z
+  - {t: Del, h: SymR}
+  - {t: Spc, h: Num}
+  - {t: Esc, h: Nav}
+  - {t: Tab, h: Mouse}
+  - {t: Bspc, h: Fn}
+  - {t: Enter, h: SymL}
+  SymL:
+  - '!'
+  - '@'
+  - '#'
+  - $
+  - '%'
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - +
+  - '='
+  - (
+  - )
+  - '"'
+  - {t: SymL, h: toggle}
+  - Ctrl
+  - Gui
+  - Alt
+  - Shift
+  - <
+  - '|'
+  - '-'
+  - '>'
+  - \
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: held}
+  SymR:
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - ^
+  - '&'
+  - '*'
+  - '?'
+  - ''''
+  - Shift
+  - Alt
+  - Gui
+  - Ctrl
+  - {t: SymR, h: toggle}
+  - ':'
+  - ']'
+  - '['
+  - '}'
+  - '{'
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - '`'
+  - _
+  - /
+  - '~'
+  - ;
+  - {type: held}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  Fn:
+  - F12
+  - F7
+  - F8
+  - F9
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - F11
+  - F4
+  - F5
+  - F6
+  - PrtSc
+  - {t: Fn, h: toggle}
+  - Ctrl
+  - Gui
+  - Alt
+  - Shift
+  - F10
+  - F1
+  - F2
+  - F3
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: held}
+  - {type: trans}
+  Num:
+  - {type: trans}
+  - $$mdi:brightness-7$$
+  - {type: trans}
+  - $$mdi:volume-high$$
+  - {type: trans}
+  - +
+  - '7'
+  - '8'
+  - '9'
+  - '*'
+  - Shift
+  - Alt
+  - Gui
+  - Ctrl
+  - {t: Num, h: toggle}
+  - '0'
+  - '4'
+  - '5'
+  - '6'
+  - ':'
+  - {type: trans}
+  - $$mdi:brightness-5$$
+  - {type: trans}
+  - $$mdi:volume-medium$$
+  - {type: trans}
+  - '-'
+  - '1'
+  - '2'
+  - '3'
+  - /
+  - {type: trans}
+  - {type: held}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  Nav:
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - PgUp
+  - ↑
+  - Home
+  - {type: trans}
+  - Shift
+  - Alt
+  - Gui
+  - Ctrl
+  - {t: Nav, h: toggle}
+  - {type: trans}
+  - ←
+  - ↓
+  - →
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - PgDn
+  - {type: trans}
+  - End
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: held}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  Mouse:
+  - MClick
+  - RClick
+  - Mouse ↑
+  - LClick
+  - Scroll ↑
+  - {type: trans}
+  - LClick
+  - {type: trans}
+  - RClick
+  - MClick
+  - {type: trans}
+  - Mouse ←
+  - Mouse ↓
+  - Mouse →
+  - Scroll ↓
+  - {t: Mouse, h: toggle}
+  - Ctrl
+  - Gui
+  - Alt
+  - Shift
+  - {type: trans}
+  - Scroll ←
+  - {type: trans}
+  - Scroll →
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: held}
+  - {type: trans}
+  - {type: trans}
+  EmacsN:
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - Alt+B
+  - {t: PgUp, h: M-<}
+  - ↑
+  - Ctl+A
+  - Alt+Sft+%
+  - Shift
+  - Alt
+  - Gui
+  - Ctrl
+  - {type: held}
+  - Ctl+R
+  - ←
+  - ↓
+  - →
+  - Ctl+S
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - Alt+F
+  - {t: PgDn, h: M->}
+  - {t: C-s, h: QRR}
+  - Ctl+E
+  - Ctl+Sft+-
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  EmacsW:
+  - C-x 0
+  - C-x 3
+  - C-x 2
+  - C-x 1
+  - Ctl+Bspc
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - C-x o
+  - C-x b
+  - C-x C-s
+  - Ctl+K
+  - {type: held}
+  - Ctrl
+  - Gui
+  - Alt
+  - Shift
+  - C-x C-w
+  - C-x k
+  - {type: trans}
+  - C-x C-f
+  - Ctl+Del
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  Sys:
+  - BT 0
+  - BT 1
+  - BT 2
+  - BT 3
+  - BT Clr
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - Boot
+  - Boot
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - Reset
+  - Reset
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: held}
+  - {type: trans}
+  - {type: trans}
+  - {type: held}
+  - {type: trans}
+  Combos: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+combos:
+- p: [1, 0]
+  k: Esc
+  l: [Base]
+- p: [0, 5]
+  k: Caps Word
+  l: [Base]

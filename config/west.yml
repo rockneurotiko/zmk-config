@@ -2,12 +2,49 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    # Additional modules containing boards/shields/custom code can be listed here as well
-    # See https://docs.zephyrproject.org/3.2.0/develop/west/manifest.html#projects
+    - name: urob
+      url-base: https://github.com/urob
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: v0.3
       import: app/west.yml
+
+    # Urob's helper macros: ZMK_HOLD_TAP, ZMK_LAYER, ZMK_COMBO, etc.
+    - name: zmk-helpers
+      remote: urob
+      revision: v0.3 # Should match ZMK release.
+
+    # ── Optional modules (uncomment to enable) ──────────────────────────
+    # Adaptive key (for magic-shift / repeat key):
+    # - name: zmk-adaptive-key
+    #   remote: urob
+    #   revision: main
+    #   path: modules/zmk/adaptive-key
+    #
+    # Auto-layer (for numword — auto-deactivating number layer):
+    # - name: zmk-auto-layer
+    #   remote: urob
+    #   revision: main
+    #   path: modules/zmk/auto-layer
+    #
+    # Tri-state (for smart-mouse and alt-tab swapper):
+    # - name: zmk-tri-state
+    #   remote: urob
+    #   revision: main
+    #   path: modules/zmk/tri-state
+    #
+    # Leader key (for Unicode input and system commands):
+    # - name: zmk-leader-key
+    #   remote: urob
+    #   revision: main
+    #   path: modules/zmk/leader-key
+    #
+    # Unicode (for Umlauts, Greek letters, etc.):
+    # - name: zmk-unicode
+    #   remote: urob
+    #   revision: main
+    #   path: modules/zmk/unicode
+
   self:
     path: config
