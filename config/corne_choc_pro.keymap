@@ -64,7 +64,7 @@
 
 / {
     keymap {
-        Base {
+        layer_Base {
             sensor-bindings =
                 <&inc_dec_kp C_VOL_DN C_VOL_UP>
                 <&inc_dec_kp PG_UP PG_DN>
@@ -72,7 +72,7 @@
                 <&inc_dec_kp C_BRI_DN C_BRI_UP>    /* right_ex2: brightness */
             ;
         };
-        Nav {
+        layer_Nav {
             sensor-bindings =
                 <&inc_dec_kp C_VOL_DN C_VOL_UP>
                 <&inc_dec_kp PG_UP PG_DN>
@@ -80,7 +80,7 @@
                 <&inc_dec_kp C_VOL_DN C_VOL_UP>    /* right_ex2: volume */
             ;
         };
-        Fn {
+        layer_Fn {
             sensor-bindings =
                 <&inc_dec_kp C_VOL_DN C_VOL_UP>
                 <&inc_dec_kp PG_UP PG_DN>
