@@ -8,6 +8,7 @@ modules/
 zephyr/*
 !zephyr/module.yml
 zmk-helpers/
+zmk-nice-oled/
 
 # Build artifacts
 .build/
