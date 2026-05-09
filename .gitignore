@@ -16,3 +16,5 @@ firmware/
 
 # Extracted ZSA layout files
 *.zip
+/zmk-keypeek-layer-notifier/
+/zmk-raw-hid/
