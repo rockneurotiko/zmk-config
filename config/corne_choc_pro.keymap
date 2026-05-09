@@ -17,6 +17,7 @@
  */
 
 #define CONFIG_WIRELESS
+#define CONFIG_HAS_RGB_UNDERGLOW
 
 /* ── Adapt the 34-key base layout to the 40-position 5-col grid ──────────
  *

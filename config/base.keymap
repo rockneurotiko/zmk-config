@@ -38,7 +38,7 @@
   #define _BT_SEL_KEYS_ &trans &trans &trans &trans &trans
 #endif
 
-#ifdef CONFIG_ZMK_RGB_UNDERGLOW
+#ifdef CONFIG_HAS_RGB_UNDERGLOW
   #include <dt-bindings/zmk/rgb.h>
   #define _RGB_TOG_ &rgb_ug RGB_TOG
 #else
