@@ -66,26 +66,26 @@
     keymap {
         layer_Base {
             sensor-bindings =
-                <&inc_dec_kp C_VOL_DN C_VOL_UP>
-                <&inc_dec_kp PG_UP PG_DN>
-                <&inc_dec_kp C_VOL_DN C_VOL_UP>    /* right_ex1: volume */
-                <&inc_dec_kp C_BRI_DN C_BRI_UP>    /* right_ex2: brightness */
+                <&inc_dec_kp C_VOL_DN C_VOL_UP>,
+                <&inc_dec_kp PG_UP PG_DN>,
+                <&inc_dec_kp C_VOL_DN C_VOL_UP>,    /* right_ex1: volume */
+                <&inc_dec_kp C_BRI_DN C_BRI_UP>     /* right_ex2: brightness */
             ;
         };
         layer_Nav {
             sensor-bindings =
-                <&inc_dec_kp C_VOL_DN C_VOL_UP>
-                <&inc_dec_kp PG_UP PG_DN>
-                <&inc_dec_kp PG_UP PG_DN>          /* right_ex1: page up/down */
-                <&inc_dec_kp C_VOL_DN C_VOL_UP>    /* right_ex2: volume */
+                <&inc_dec_kp C_VOL_DN C_VOL_UP>,
+                <&inc_dec_kp PG_UP PG_DN>,
+                <&inc_dec_kp PG_UP PG_DN>,          /* right_ex1: page up/down */
+                <&inc_dec_kp C_VOL_DN C_VOL_UP>     /* right_ex2: volume */
             ;
         };
         layer_Fn {
             sensor-bindings =
-                <&inc_dec_kp C_VOL_DN C_VOL_UP>
-                <&inc_dec_kp PG_UP PG_DN>
-                <&inc_dec_kp C_PREV C_NEXT>        /* right_ex1: prev/next track */
-                <&inc_dec_kp C_VOL_DN C_VOL_UP>    /* right_ex2: volume */
+                <&inc_dec_kp C_VOL_DN C_VOL_UP>,
+                <&inc_dec_kp PG_UP PG_DN>,
+                <&inc_dec_kp C_PREV C_NEXT>,        /* right_ex1: prev/next track */
+                <&inc_dec_kp C_VOL_DN C_VOL_UP>     /* right_ex2: volume */
             ;
         };
     };
