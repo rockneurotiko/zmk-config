@@ -18,3 +18,4 @@ firmware/
 *.zip
 /zmk-keypeek-layer-notifier/
 /zmk-raw-hid/
+/bin

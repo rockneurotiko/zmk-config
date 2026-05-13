@@ -340,13 +340,13 @@ layers:
   - BT 3
   - BT Clr
   - {type: trans}
+  - '&studio_unlock'
   - {type: trans}
   - {type: trans}
   - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
+  - OUT USB
+  - OUT BLE
+  - OUT TOG
   - {type: trans}
   - Boot
   - Boot
@@ -375,6 +375,6 @@ combos:
 - p: [1, 0]
   k: Esc
   l: [Base]
-- p: [0, 5]
+- p: [4, 5]
   k: Caps Word
   l: [Base]

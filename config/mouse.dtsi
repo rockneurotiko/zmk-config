@@ -3,14 +3,14 @@
  * Requires CONFIG_ZMK_POINTING=y in the board .conf file.
  */
 
-#define ZMK_POINTING_DEFAULT_MOVE_VAL 600
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 1600
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 20
 
 #include <dt-bindings/zmk/pointing.h>
 
 &mmv {
   acceleration-exponent = <1>;
-  time-to-max-speed-ms = <500>;
+  time-to-max-speed-ms = <300>;
   delay-ms = <0>;
 };
 

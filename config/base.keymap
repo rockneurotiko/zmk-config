@@ -116,8 +116,20 @@
                require-prior-idle-ms = <150>; hold-trigger-on-release;         \
                hold-trigger-key-positions = <TRIGGER_POS>;)
 
-MAKE_HRM(hml, &kp, &kp, KEYS_R THUMBS)  // Left-hand HRMs.
-MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS)  // Right-hand HRMs.
+/* Shift-specific HRM: no require-prior-idle so shift always has a chance to
+ * activate as a hold, even during fast typing.  Positional filtering alone
+ * is sufficient to prevent false activations (verified by diagnostic tests
+ * 1, 2 & 6 — same-hand rolls were 100% clean). */
+#define MAKE_HRM_SHIFT(NAME, HOLD, TAP, TRIGGER_POS)                           \
+  ZMK_HOLD_TAP(NAME, bindings = <HOLD>, <TAP>; flavor = "balanced";            \
+               tapping-term-ms = <280>; quick-tap-ms = <QUICK_TAP_MS>;         \
+               hold-trigger-on-release;                                        \
+               hold-trigger-key-positions = <TRIGGER_POS>;)
+
+MAKE_HRM(hml, &kp, &kp, KEYS_R THUMBS)       // Left-hand HRMs.
+MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS)       // Right-hand HRMs.
+MAKE_HRM_SHIFT(hml_s, &kp, &kp, KEYS_R THUMBS)  // Left-hand shift HRM.
+MAKE_HRM_SHIFT(hmr_s, &kp, &kp, KEYS_L THUMBS)  // Right-hand shift HRM.
 
 /* Layer-tap HRMs for inner index keys (I → Emacs Nav, D → Emacs Win).
  * These use &mo for hold instead of &kp, but keep the same positional/timing
@@ -201,7 +213,7 @@ ZMK_BASE_LAYER(Base,
 //╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
     &kp SQT       &kp COMMA     &kp DOT       &kp P         &kp Y       ,   &kp F         &kp G         &kp C         &kp R         &kp L       ,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    &hml LSHFT A  &hml LALT O   &hml LGUI E   &hml LCTRL U  &hml_l EMACS_N I, &hmr_l EMACS_W D &hmr RCTRL H &hmr LGUI T  &hmr LALT N   &hmr RSHFT S,
+    &hml_s LSHFT A &hml LALT O   &hml LGUI E   &hml LCTRL U  &hml_l EMACS_N I, &hmr_l EMACS_W D &hmr RCTRL H &hmr LGUI T  &hmr LALT N   &hmr_s RSHFT S,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     &kp SEMI      &kp Q         &kp J         &kp K         &kp X       ,   &kp B         &kp M         &kp W         &kp V         &kp Z       ,
 //╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┴───────────────────────────╯
@@ -404,20 +416,26 @@ ZMK_BASE_LAYER(EmacsW,
 
 /*  Layer 9 — System (activated by FN + NUM simultaneously)
  *  ╭──────┬──────┬──────┬──────┬──────╮ ╭──────┬──────┬──────┬──────┬──────╮
- *  │ BT 0 │ BT 1 │ BT 2 │ BT 3 │BT CLR│ │RGB Tg│      │      │      │      │
+ *  │ BT 0 │ BT 1 │ BT 2 │ BT 3 │BT CLR│ │RGB Tg│Unlock│      │      │      │
  *  ├──────┼──────┼──────┼──────┼──────┤ ├──────┼──────┼──────┼──────┼──────┤
- *  │      │      │      │      │ Boot │ │ Boot │      │      │      │      │
+ *  │O: USB│O: BLE│O: Tog│      │ Boot │ │ Boot │      │      │      │      │
  *  ├──────┼──────┼──────┼──────┼──────┤ ├──────┼──────┼──────┼──────┼──────┤
  *  │      │      │      │      │ Reset│ │ Reset│      │      │      │      │
  *  ╰──────┴──────┴──────┼──────┼──────┼──────╮ ╭──────┼──────┼──────┴──────┴──────╯
  *                       │      │      │      │ │      │      │      │
  *                       ╰──────┴──────┴──────╯ ╰──────┴──────┴──────╯
  */
+#ifdef CONFIG_WIRELESS
+  #define _OUT_KEYS_ &out OUT_USB &out OUT_BLE &out OUT_TOG
+#else
+  #define _OUT_KEYS_ &trans &trans &trans
+#endif
+
 ZMK_BASE_LAYER(Sys,
 //╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-                               _BT_SEL_KEYS_                            ,   _RGB_TOG_     ___           ___           ___           ___         ,
+                               _BT_SEL_KEYS_                            ,   _RGB_TOG_     &studio_unlock ___          ___           ___         ,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    ___           ___           ___           ___           &bootloader ,   &bootloader   ___           ___           ___           ___         ,
+    _OUT_KEYS_                                ___           &bootloader ,   &bootloader   ___           ___           ___           ___         ,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     ___           ___           ___           ___           &sys_reset  ,   &sys_reset    ___           ___           ___           ___         ,
 //╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┴───────────────────────────╯
